@@ -13,6 +13,8 @@ permissions:
 
 env:
   TF_VAR_github_token: "${{ secrets.GITHUB_TOKEN }}"
+  TF_VAR_tfstate_access_key: "${{ secrets.TFSTATE_ACCESS_KEY }}"
+  TF_VAR_tfstate_secret_key: "${{ secrets.TFSTATE_SECRET_KEY }}"
   CIVO_TOKEN: "${{ secrets.CIVO_TOKEN }}"
 
 jobs:
