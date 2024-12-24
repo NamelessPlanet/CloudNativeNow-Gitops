@@ -104,5 +104,5 @@ jobs:
           }
 
     - name: OpenTofu Apply
-      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      if: github.event_name != 'pull_request'
       run: tofu apply -auto-approve -input=false
