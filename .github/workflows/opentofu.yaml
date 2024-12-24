@@ -11,6 +11,7 @@ permissions:
 
 env:
   TF_VAR_github_token: "${{ secrets.GITHUB_TOKEN }}"
+  CIVO_TOKEN: "${{ secrets.CIVO_TOKEN }}"
 
 jobs:
   opentofu:
@@ -81,9 +82,7 @@ jobs:
           ${process.env.PLAN}
           \`\`\`
 
-          </details>
-
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+          </details>`;
 
           // 3. If we have a comment, update it, otherwise create a new one
           if (botComment) {
