@@ -31,7 +31,6 @@ resource "civo_object_store" "cloudnativenow" {
 }
 
 resource "flux_bootstrap_git" "cloudnativenow" {
-  embedded_manifests     = true
-  path                   = "flux"
-  components = ["source-controller", "kustomize-controller", "helm-controller"]
+  embedded_manifests = true
+  path               = "flux"
 }
