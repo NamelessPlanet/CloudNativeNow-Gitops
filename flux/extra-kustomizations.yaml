@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: flux-system
   interval: 5m0s
-  path: ./cluster/apps
+  path: ./apps
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,7 +22,7 @@ spec:
   dependsOn:
     - name: apps
   interval: 5m0s
-  path: ./cluster/extra-config
+  path: ./extra-config
   prune: true
   sourceRef:
     kind: GitRepository
