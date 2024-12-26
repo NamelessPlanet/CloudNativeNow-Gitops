@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - main
+
 concurrency:
   group: ${{ github.workflow }}
 
@@ -23,6 +24,8 @@ jobs:
   opentofu:
     name: 'OpenTofu'
     runs-on: ubuntu-latest
+
+    if: "github.actor != 'Flux'"
 
     defaults:
       run:
