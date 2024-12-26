@@ -4,6 +4,7 @@ metadata:
   name: kube-state-metrics
   namespace: default
 spec:
+  interval: 5m0s
   url: oci://charts.bitnami.com/bitnami
   ref:
     tag: 4.3.1
