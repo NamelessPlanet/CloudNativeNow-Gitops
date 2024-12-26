@@ -20,7 +20,7 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
   write_kubeconfig = true
 
   pools {
-    size       = "g4s.kube.small"
+    size       = "g4s.kube.xsmall"
     node_count = 2
   }
 }
