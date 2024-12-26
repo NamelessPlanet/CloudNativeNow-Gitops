@@ -2,10 +2,15 @@ name: "OpenTofu"
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - 'infra/*'
   pull_request:
     branches:
       - main
+    paths:
+      - 'infra/*'
 
 concurrency:
   group: ${{ github.workflow }}
