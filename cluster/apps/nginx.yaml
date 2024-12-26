@@ -1,0 +1,30 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  url: https://kubernetes.github.io/ingress-nginx
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  interval: 5m
+  targetNamespace: kube-system
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: "4.11.3"
+      sourceRef:
+        kind: HelmRepository
+        name: nginx
+        namespace: default
+  values:
+    controller:
+      replicaCount: 2
+      watchIngressWithoutClass: true
+      metrics:
+        enabled: true
