@@ -32,5 +32,5 @@ resource "civo_object_store" "cloudnativenow" {
 
 resource "flux_bootstrap_git" "cloudnativenow" {
   embedded_manifests     = true
-  path                   = "cluster"
+  path                   = "flux"
 }
