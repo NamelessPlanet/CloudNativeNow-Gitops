@@ -42,8 +42,11 @@ spec:
         namespace: default
   values:
     cloudProvider: civo
+    autoscalingGroups:
+      - name: workers
+        minSize: 2
+        maxSize: 5
     extraArgs:
-      nodes: "2:5:workers"
       skip-nodes-with-local-storage: "false"
       skip-nodes-with-system-pods: "false"
       scale-down-delay-after-add: "20m"
