@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   interval: 5m0s
-  url: oci://charts.bitnami.com/bitnami
+  url: oci://registry-1.docker.io/bitnamicharts/kube-state-metrics
   ref:
     tag: 4.3.1
 ---
