@@ -20,7 +20,7 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
   write_kubeconfig = true
 
   pools {
-    size       = "g4s.kube.xsmall"
+    size       = "g4s.kube.small"
     node_count = 2
   }
 }
@@ -31,6 +31,7 @@ resource "civo_object_store" "cloudnativenow" {
 }
 
 resource "flux_bootstrap_git" "cloudnativenow" {
-  embedded_manifests = true
-  path               = "cluster"
+  embedded_manifests     = true
+  path                   = "cluster"
+  kustomization_override = file("${path.root}/resources/flux-kustomization-patch.yaml")
 }

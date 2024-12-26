@@ -1,0 +1,29 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: flux-system
+  interval: 5m0s
+  path: ./cluster/apps
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: extra-config
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: apps
+  interval: 5m0s
+  path: ./cluster/extra-config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
