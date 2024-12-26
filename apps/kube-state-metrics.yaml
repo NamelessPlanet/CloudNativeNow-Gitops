@@ -1,5 +1,5 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+kind: OCIRepository
 metadata:
   name: kube-state-metrics
   namespace: default
@@ -19,7 +19,7 @@ spec:
       chart: kube-state-metrics
       version: "4.3.1"
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: kube-state-metrics
         namespace: default
   values:
