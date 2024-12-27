@@ -41,7 +41,7 @@ spec:
     ghostHost: cloudnative.now
     ghostPath: /
     ghostEnableHttps: true
-    allowEmptyPassword: false
+    allowEmptyPassword: true # Until database setup
     ghostSkipInstall: false
 
     extraEnvVars:
