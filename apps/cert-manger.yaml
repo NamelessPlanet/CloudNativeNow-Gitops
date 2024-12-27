@@ -25,5 +25,6 @@ spec:
   values:
     installCRDs: true
     resources:
-      requests: 30m
+      requests:
+        memory: 30m
 ---
