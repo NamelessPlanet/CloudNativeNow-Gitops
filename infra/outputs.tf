@@ -24,3 +24,24 @@ output "objectstore_access_key_id" {
   description = "The Access Key ID for the objectstore"
   sensitive   = true
 }
+
+output "database_endpoint" {
+  value       = civo_database.cloudnativenow.dns_endpoint
+  description = "The endpoint of the database"
+}
+
+output "database_port" {
+  value       = civo_database.cloudnativenow.port
+  description = "The port of the database"
+}
+
+output "database_username" {
+  value       = civo_database.cloudnativenow.username
+  description = "The username of the database"
+}
+
+output "database_password" {
+  value       = civo_database.cloudnativenow.password
+  description = "The password of the database"
+  sensitive = true
+}

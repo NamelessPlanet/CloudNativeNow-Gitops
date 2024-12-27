@@ -36,6 +36,17 @@ resource "civo_object_store" "cloudnativenow" {
   max_size_gb = 500
 }
 
+resource "civo_database" "cloudnativenow" {
+  name    = "cloudnativenow"
+  firewall_id = civo_firewall.cloudnativenow.id
+  network_id  = civo_network.cloudnativenow.id
+
+  size    = "g3.db.xsmall"
+  nodes   = 1
+  engine  = "MySQL"
+  version = "8.0"
+}
+
 resource "flux_bootstrap_git" "cloudnativenow" {
   embedded_manifests = true
   path               = "flux"
