@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: url-to-grist
+  labels:
+    app.kubernetes.io/name: url-to-grist
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: url-to-grist
+  namespace: url-to-grist
+  labels:
+    app.kubernetes.io/name: url-to-grist
+spec:
+  encryptedData:
+    GEMINI_TOKEN: AgB9D4Jgmv82ulmF0N/d6iAg9WrScrrcK4XKHkRj3H9zisQbQ0S1UXMqV6yLjlR1Q4oJ/Sy5hsFuocOVLGXHfzLNaoK8SGzl1GtEFwk+3zhkaUWBoBILHgQ07IgzuBXpzDsa7RCXe+Lx9HduR+9iQfg/jg80SJXLO8As6qyrWgZpz6GcwLPk5ciPG6DQBQIHp/s1sOFJ0CY8uq888GBJVF5bQX0utasBthAyWx/XNmO0SFBHKT6fLdvixQSltyi0kSMvhkm09vTh+/Aivqzn0WuF93trnmY6F7yrjsng5xsYW1XG5n8VWWR30F7UtT49ZNgiZBxy7RlhuLXs0M/zsSMXTqSrIc+1TV7aFtSlirvTT4pHVDaZkVgskjvRDnBmF12XqTf9hc3HtPTAXFo2LtZQO7LjwDNDYQuTgM08YiQahd/UO+8LtSgOFrej2Cd+kKjglJDIVUWRB1am1KE8xtSku25l1SNLBr9XFDDCCcGiYWf81d9JVAggTYwhFe4pWOYuQPkCArJ7c0Si6eeCK2MAv155j6xuHxS8WsU68FUo7eYboCISyVOQ2spWDLVJ+ciZDOhEFe8aQGYb3wHPbkVGrf8FqSRFofs9R3XBJlA6Z3X2iKz1dIF8h2EKdF9lIxcS4XYBfQrYbXuo2jEBG2TZYVIwHL5MalRA67oCQgdBrd8zz0wHdZxIwxwn3a68VlHA/TTdJe3uhOhMjJLVK+BMTgkdmsUnxXAr6wXB6H7nLN/uchun0JY=
+    GRIST_API_KEY: AgB6zbzhRYdzV8tQwPGmkAKTma/G9gmjcISdzVuTebC+WdNt5Kv+BqhIXPT6tmUsiDypEzBsXWQq+ef0cWaQFzLlhQPEU1T4KSb729qHs8jOQUbphKlyMu5SFH9iMg6m/HC8DvpfJcd58cbU3w2YL1VcFavv0wm9EFeVvdOpZ1GCzmXrcahoX/KVFyhr1MuHTss9H4+utVEl7ta4m65LAzH2jog38OfKOSFHPhKHmThhDPTt2nPwMArMiw7FPQKzib2CLiHqWR8UxwlJMxZ2LEk8kKjQTAqm3EHBhumD6vaidhF0fgiGH2o8wh5rXpcDdW6HKv+WR6QoeJzuTCwy4PR+4xu2NAAaNv/LmoZAJC+ovrK3s+orDke8n8On8zvLe7FQDcRIRXcM3l8BlCv+TrtUHq9h+8h8sOzy3yskW6PFt74tzY/iB3jVQOZeGJ0OF1HWxgSYapPi23VremPJwRLfID0J1Xu9Xtas+KMm3revX5ArljlNYzQaMtzN4dqen7FyIc1dip3Xo7F2b/b+jAG/XUkASWUS1BBZkrhSPWdMuICQ8o2EM4e6vYjqnEcNtj8+4RUSUgspkHlGMQifB0CJ7iLmfSXn2L9UzAW57EnFEBMb/4uVAvi+VLSpIAdT5FLIuayHRHpD7uqF5hfyU2huUlj+4P24GiDehaDzD7aYP3Gg7VZf+qYsWhb5In8GuQjFNVZ+fpaHbYGV4FQfrfQgvbpMTD9TyaId2/+ZmBhacHy0lW+TA2wV
+    GRIST_TABLE_URL: AgBRGY8jbjaAEiPGx8g0F/bbb//wSdVVQRKiTlvbeAjNnTCVrfI10muDHmx0l/SAyNr7mk8+hv1ABASHOUrvC6H52eLLOeYEUqtSTw384KTgE1lLbPHIAp7NuzWaK0Lzq0N40PP/Lqgvg4TLWFupgC1yBAnQHXpd1BgU5mQ7G9Y+e6amZsN4qd/UoS+rgGSn3S3EsvYg2uAvYR9cI30Ww5tXioec9vgt5YArux/GK589OGmu2Q/Iad2ngcV17JhsZjjj6AR/TmRaYw4qLconYh0YEtsIay7yKPsLtcrAlrpCAukB8sQB/Y+xlqrYavFR6CYSiRGQk3VFqh/WL2DupacuR7g/wAsHpmKBBzpfIJYb8QhPe4gngLRU13q6zwSG/hLhy7QAPxrO+rJMC7faFqG5j0+Dgp4ZpQ5iAsEa0wqwlaOlxH1S8ASvSfjPr673A+JB9tRwtKXk3yD0oTE9RGBjUQrhTuVDAjIjRsQ5XZcsei2Fii1bTlsKqLTW+9ag/GjISbEdif8zLO7vZRbKlPqa7mCpghYEWkZq55s94/oYQXxFWmEFmoWZ49biCh71N5ER4OaFd2VUyNl+KH8zZCEaGK+HpWCX+tDozqKreQBMRrljf3n8VUmYqNGF1sl45A17I8DnMlU01XLGFT3LdM/dlfNyYgvkksDd5M8g+tACJfpZSjoo3BrnpS+Zqh3P+Ee3y8k4qHqPQU3IIUrBCmbgp/1egfFvn0omDkBizvu8KP+e/ZPP/qlZN+yPnBkLNA7MUkNjoTxuS+33CWAZGln/H8gi6uDFgZo5OseUT7EH/bjXDWtlK9DsyHOvGnhfZwbO
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/name: url-to-grist
+      name: url-to-grist
+      namespace: url-to-grist
+    type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: url-to-grist
+  namespace: url-to-grist
+  labels:
+    app.kubernetes.io/name: url-to-grist
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: web
+    name: web
+  selector:
+    app.kubernetes.io/name: url-to-grist
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-to-grist
+  namespace: url-to-grist
+  labels:
+    app.kubernetes.io/name: url-to-grist
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: url-to-grist
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: url-to-grist
+    spec:
+      containers:
+      - name: web
+        image: ghcr.io/namelessplanet/url-to-grist:v1.0.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: "8080"
+        envFrom:
+        - secretRef:
+            name: "url-to-grist"
+        ports:
+        - containerPort: 8080
+          name: web
+        resources:
+          limits:
+            memory: 20Mi
+          requests:
+            memory: 20Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: url-to-grist
+  namespace: url-to-grist
+  labels:
+    app.kubernetes.io/name: url-to-grist
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - url-to-grist.cloudnative.now
+    secretName: url-to-grist-ingress
+  rules:
+  - host: url-to-grist.cloudnative.now
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: url-to-grist
+            port:
+              number: 80
