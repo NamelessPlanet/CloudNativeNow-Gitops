@@ -49,6 +49,8 @@ spec:
         value: "false"
       - name: "privacy__useGravatar"
         value: "false"
+      - name: "ALLOW_EMPTY_PASSWORD"
+        value: "yes"
 
     service:
       type: ClusterIP
