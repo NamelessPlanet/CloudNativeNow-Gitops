@@ -1,0 +1,17 @@
+{
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchFileNames": [".github/workflows/**"],
+      "groupName": "GitHub Workflows",
+    },
+    {
+      "matchFileNames": ["infra/**"],
+      "groupName": "OpenTofu",
+    },
+    {
+      "matchFileNames": ["flux/**"],
+      "groupName": "Flux",
+    },
+  ],
+}
