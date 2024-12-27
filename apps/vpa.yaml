@@ -23,8 +23,11 @@ spec:
         name: vpa
         namespace: default
   values:
-    controller:
-      flags:
+    recommender:
+      extraArgs:
+        v: "4"
+        pod-recommendation-min-cpu-millicores: 11
+        pod-recommendation-min-memory-mb: 5
         on-by-default: true
     updater:
       enabled: false
