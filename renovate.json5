@@ -1,5 +1,8 @@
 {
   "extends": ["config:recommended"],
+  "branchConcurrentLimit": 10,
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 10,
   "kubernetes": {
     "fileMatch": ["\\.y[a]?ml$"],
     "ignorePaths": [
