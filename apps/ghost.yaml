@@ -5,6 +5,26 @@ metadata:
   labels:
     app.kubernetes.io/name: ghost
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: ghost-secrets
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+spec:
+  encryptedData:
+    ghost-password: AgCrvbKWMO0DzAxmLHpckNV9oRn+7REGB8PmsFgI17W/AY5Ai5NkKBUkktny0VL9jA/wWA7P8ZXzgiRU3LOLAXXUTb+mqLLYExjWtBlQ/ahlCfZCnKx3rPB1dw/fBtg5WOcjki0kvYR+Tkdl+2wqolpVKij3EfEtDZ4KxrbAGJFWYS9e6WxsFuFlfRqv0Zt2YmHA8sQdLqqmG8JmeDCubpUk07P0o0NJnmWsW2+VeE7ekV8snJHUpoKIWf9SJwk9V6B4uFR94N9fge3xWXIZ7UTOTT8DePAcGy0hlUf0Jpm5GFGc0DnGGn0K8hoaVpWUST7EtBID3nmlbmTosn32Tjp2yUaDxsq+SprbmwSpljOy1WxYV6MTqa9cbPAd/SexZxoAOIucTw9ggZq87fi8TcL28DF0siyjVosqnNAMzrQv2ePm0C4dfxUF5JyOgjVfOUI9aMRIUyaxGXVk+h8XKLeYhjfKcHlerorOovKX9rMq/n0tJgdQycWRs1XED9X5GT4m8wdEhwnHJAkCv4YvFBT+Xx0EPC/BfprpqUe34v1od7zUaWjfo7kAwFKQlm43jWwocyer7wEhEKEUQpmRniMizC4Q+1qI1DJkYTmjfF37bZvMmRrGbFlNPdLCVkKNP0tQDFNg+w2LVYmou7BwvZqePRohgcHF/lqCipx6YXh0R93sO8W1wijXsrunrWHas0dMiPrXsQIGsyJXHuOHyfai2EhxlOsypOjG8wsVIHY=
+    mysql-password: AgBJja8JHD41b1iqtBmnoymvJFQgfdwrZeRNT4oVu+0xcTqS915G7EJW2EBRmBdXkm37KG12pzRiqJNa+NXmq8u88/8SF96IxjICig8+gxH+RjYf+dOfKiZMN6fgWEtu5YWfcD5iE++UmxESlFkWnA8FahJTKsFFMxhi0MOJKwIqau58rM9F0EO4s/HaUnWyB1IW8B0tzbwu7HPuniMFgGItQ3NEw+FuUhJaa2txTfRDhN4724UAXEEnoE95YrhRRLGdmYvtxBMNidDGW5o9ZZdiTiqh3pSBikZBLzqlyWaXsSotoWXj8VRu7KpwDZH8vCtu0W3bESQ0czKC5ziKFr8UmkAdXznMpL4qkioFod6tSRbgr0OfiAMieSN5Vb1rsTHt8MhLjzeMid1TI8lOK6F21KC3cEp8jZu1ZHiXHJiRHYgcHBSlLCxDJjfrWGwiC1ZbjbyJDzlcQSkE3IpbvqTc7KsP9JKGXsfDeMQEVU9GNgCLLdeVWzyCTbYkFAHTB0S70zRzA0bFgjfZYzdG3SQ589dXNTeHMiYaO/DOZ0Z21gXN38hxy5lYGBHG8fUok2V7DobIhQ6UsGSSNmXz9QyJ5S8+2BQjgmX5Yqq9d8gLKU0w+Q3UbIbrpTUZbCPD+Biz8YXPuoagQZ+yeKQO6cLC8Y6xFNBLhcnyowDsWzE0aLnU+5k1vCF74uALbizE5s2s4bBN7qmA/Zz7R0ZPwVHBkD2g
+    smtp-password: AgALDyPmOY/oTvOlYXbv2T4EhCbEX8WXF/xPQeoJjQj4RzEn4xi8YWcaYY+YkC4U8HYwqmQWPh0qeD7LhpsBV3fjK1hYD5rfHFMLiQ2bumP/iCYUEFd2jlQTQfm3GQ3xy7MRRvtIq/yhUVj4dhCWjvkBxjktW+rLIOxoHUKq5UVndA/HLWLclZDKggui8KBStV9la+NJWkobZEtf9u7rtHNgdU37kcy9FS7q/3VHpE8Op8UFhfWjVEGuO+6BP/VZs9rrVxDTrN0+4A9yU+awut/iWZMRaQcDO3avfWgJ6TrH7lkGkmx7b5UfMwCo0zL7bTQ+Xb4orh7vANQmSo1pQyDDVqxdcc17l7+aIrSQlV4FXFxu0DF3gCPkEWpzXfmFbxgQR/UP91RnFxoUyx6b+SuXlz7icGHGMNVrmZEOWIVWxu6nYYSS/pj0sB5o+/xYBfl+sXdVKVIovL03dGuOHj+tvc8vXLcX0jfdEOkN2t4i0fMoOaPmdXqQh2+UY3FhVx7yAMh745DPJFC+eV2zn0khxBfD4GBQg6BN7YS9bu6R3Crjr88vVmmP/egsZbxuc95pW+NxRos0bgsudJQ1h3tfQOdywKNuH7GnIBfhmmEnbnQzDavndK4S+ivIP21WYDriMy3PLtxBLwuLr6BBHtbog+ua+rzPUN1nOTQ78UmC5JoYyF9WEaW2Tr3hcznG/B0G1vcCwZscHsx+KBwtE4jAqJ5ryQi72N2OeSV89Qiqg2dFkSdbgy7eNbGzfgnOBhwHLg==
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ghost
+      name: ghost-secrets
+      namespace: ghost
+    type: Opaque
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
@@ -16,82 +36,78 @@ spec:
   ref:
     tag: 22.1.2
 ---
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: ghost
-#   namespace: default
-# spec:
-#   interval: 5m
-#   targetNamespace: ghost
-#   chartRef:
-#     kind: OCIRepository
-#     name: ghost
-#     namespace: default
-#   values:
-#     # Common
-#     fullnameOverride: ghost
-#     commonLabels:
-#       app.kubernetes.io/name: ghost
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ghost
+  namespace: default
+spec:
+  interval: 5m
+  targetNamespace: ghost
+  chartRef:
+    kind: OCIRepository
+    name: ghost
+    namespace: default
+  values:
+    # Common
+    fullnameOverride: ghost
+    commonLabels:
+      app.kubernetes.io/name: ghost
 
-#     # Ghost
-#     ghostUsername: admin
-#     ghostEmail: ghost@cloudnative.now
-#     existingSecret: ghost-secrets
-#     ghostBlogTitle: CloudNativeNow
-#     ghostHost: cloudnative.now
-#     ghostPath: /
-#     ghostEnableHttps: true
-#     allowEmptyPassword: true # Until database setup
-#     ghostSkipInstall: false
+    # Ghost
+    ghostUsername: admin
+    ghostEmail: ghost@cloudnative.now
+    existingSecret: ghost-secrets
+    ghostBlogTitle: CloudNativeNow
+    ghostHost: cloudnative.now
+    ghostPath: /
+    ghostEnableHttps: true
+    allowEmptyPassword: false
+    ghostSkipInstall: false
 
-#     extraEnvVars:
-#       - name: "privacy__useUpdateCheck"
-#         value: "false"
-#       - name: "privacy__useGravatar"
-#         value: "false"
-#       - name: "ALLOW_EMPTY_PASSWORD"
-#         value: "yes"
+    extraEnvVars:
+      - name: "privacy__useUpdateCheck"
+        value: "false"
+      - name: "privacy__useGravatar"
+        value: "false"
 
-#     service:
-#       type: ClusterIP
+    service:
+      type: ClusterIP
 
-#     ingress:
-#       enabled: true
-#       hostname: cloudnative.now
-#       annotations:
-#         cert-manager.io/cluster-issuer: letsencrypt
-#         ingress.kubernetes.io/ssl-redirect: "true"
-#       ingressClassName: nginx
-#       tls: true
-#       extraHosts:
-#         - name: www.cloudnative.now
-#           path: /
-#       extraTls:
-#         - hosts:
-#             - www.cloudnative.now
-#           secretName: www.cloudnative.now-tls
+    ingress:
+      enabled: true
+      hostname: cloudnative.now
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/ssl-redirect: "true"
+      ingressClassName: nginx
+      tls: true
+      extraHosts:
+        - name: www.cloudnative.now
+          path: /
+      extraTls:
+        - hosts:
+            - www.cloudnative.now
+          secretName: www.cloudnative.now-tls
 
-#     persistence:
-#       size: 5Gi
+    persistence:
+      size: 5Gi
 
-#     # Email
-#     # TODO: Setup Mailgun
-#     # smtpHost: ""
-#     # smtpPort: ""
-#     # smtpUser: ""
-#     # smtpService: ""
-#     # smtpProtocol: ""
-#     # smtpExistingSecret: "ghost-secrets"
+    # Email
+    smtpHost: "smtp.eu.mailgun.org"
+    smtpPort: "465"
+    smtpUser: "postmaster@mail.cloudnative.now"
+    smtpService: "Mailgun"
+    smtpProtocol: "ssl"
+    smtpExistingSecret: "ghost-secrets"
 
-#     # Database
-#     mysql:
-#       enabled: false
-#     # TODO: Set up external database
-#     # externalDatabase:
-#     #   host: myexternalhost
-#     #   user: myuser
-#     #   database: mydatabase
-#     #   port: 3306
-#     #   existingSecret: "ghost-secrets"
-# ---
+    # Database
+    mysql:
+      enabled: false
+    externalDatabase:
+      host: "74.220.18.207"
+      user: root
+      database: ghost
+      port: 3306
+      existingSecret: "ghost-secrets"
+---
