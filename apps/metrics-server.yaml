@@ -22,4 +22,10 @@ spec:
         kind: HelmRepository
         name: metrics-server
         namespace: default
-  values: {}
+  values:
+    resources:
+      requests:
+        cpu: 20m
+        memory: 150Mi
+      limits:
+        memory: 150Mi

@@ -28,3 +28,9 @@ spec:
       watchIngressWithoutClass: true
       metrics:
         enabled: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 90Mi
+        limits:
+          memory: 90Mi

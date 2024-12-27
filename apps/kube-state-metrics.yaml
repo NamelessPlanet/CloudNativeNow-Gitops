@@ -23,4 +23,11 @@ spec:
     namespace: default
   values:
     installCRDs: true
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        cpu: 50m
+        memory: 100Mi
+
 ---
