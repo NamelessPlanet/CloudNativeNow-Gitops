@@ -24,4 +24,6 @@ spec:
         namespace: default
   values:
     installCRDs: true
+    resources:
+      requests: 30m
 ---
