@@ -37,7 +37,7 @@ jobs:
         working-directory: infra
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: opentofu/setup-opentofu@v1
 
     - name: OpenTofu fmt
@@ -59,7 +59,7 @@ jobs:
       continue-on-error: true
 
     - name: Comment on PR
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       if: github.event_name == 'pull_request'
       env:
         PLAN: "tofu\n${{ steps.plan.outputs.stdout }}"
