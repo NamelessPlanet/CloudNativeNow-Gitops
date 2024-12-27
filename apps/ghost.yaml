@@ -16,82 +16,82 @@ spec:
   ref:
     tag: 22.1.2
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
-metadata:
-  name: ghost
-  namespace: default
-spec:
-  interval: 5m
-  targetNamespace: ghost
-  chartRef:
-    kind: OCIRepository
-    name: ghost
-    namespace: default
-  values:
-    # Common
-    fullnameOverride: ghost
-    commonLabels:
-      app.kubernetes.io/name: ghost
+# apiVersion: helm.toolkit.fluxcd.io/v2
+# kind: HelmRelease
+# metadata:
+#   name: ghost
+#   namespace: default
+# spec:
+#   interval: 5m
+#   targetNamespace: ghost
+#   chartRef:
+#     kind: OCIRepository
+#     name: ghost
+#     namespace: default
+#   values:
+#     # Common
+#     fullnameOverride: ghost
+#     commonLabels:
+#       app.kubernetes.io/name: ghost
 
-    # Ghost
-    ghostUsername: admin
-    ghostEmail: ghost@cloudnative.now
-    # existingSecret: ghost
-    ghostBlogTitle: CloudNativeNow
-    ghostHost: cloudnative.now
-    ghostPath: /
-    ghostEnableHttps: true
-    allowEmptyPassword: true # Until database setup
-    ghostSkipInstall: false
+#     # Ghost
+#     ghostUsername: admin
+#     ghostEmail: ghost@cloudnative.now
+#     existingSecret: ghost-secrets
+#     ghostBlogTitle: CloudNativeNow
+#     ghostHost: cloudnative.now
+#     ghostPath: /
+#     ghostEnableHttps: true
+#     allowEmptyPassword: true # Until database setup
+#     ghostSkipInstall: false
 
-    extraEnvVars:
-      - name: "privacy__useUpdateCheck"
-        value: "false"
-      - name: "privacy__useGravatar"
-        value: "false"
-      - name: "ALLOW_EMPTY_PASSWORD"
-        value: "yes"
+#     extraEnvVars:
+#       - name: "privacy__useUpdateCheck"
+#         value: "false"
+#       - name: "privacy__useGravatar"
+#         value: "false"
+#       - name: "ALLOW_EMPTY_PASSWORD"
+#         value: "yes"
 
-    service:
-      type: ClusterIP
+#     service:
+#       type: ClusterIP
 
-    ingress:
-      enabled: true
-      hostname: cloudnative.now
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        ingress.kubernetes.io/ssl-redirect: "true"
-      ingressClassName: nginx
-      tls: true
-      extraHosts:
-        - name: www.cloudnative.now
-          path: /
-      extraTls:
-        - hosts:
-            - www.cloudnative.now
-          secretName: www.cloudnative.now-tls
+#     ingress:
+#       enabled: true
+#       hostname: cloudnative.now
+#       annotations:
+#         cert-manager.io/cluster-issuer: letsencrypt
+#         ingress.kubernetes.io/ssl-redirect: "true"
+#       ingressClassName: nginx
+#       tls: true
+#       extraHosts:
+#         - name: www.cloudnative.now
+#           path: /
+#       extraTls:
+#         - hosts:
+#             - www.cloudnative.now
+#           secretName: www.cloudnative.now-tls
 
-    persistence:
-      size: 5Gi
+#     persistence:
+#       size: 5Gi
 
-    # Email
-    # TODO: Setup Mailgun
-    # smtpHost: ""
-    # smtpPort: ""
-    # smtpUser: ""
-    # smtpService: ""
-    # smtpProtocol: ""
-    # smtpExistingSecret: ""
+#     # Email
+#     # TODO: Setup Mailgun
+#     # smtpHost: ""
+#     # smtpPort: ""
+#     # smtpUser: ""
+#     # smtpService: ""
+#     # smtpProtocol: ""
+#     # smtpExistingSecret: "ghost-secrets"
 
-    # Database
-    mysql:
-      enabled: false
-    # TODO: Set up external database
-    # externalDatabase:
-    #   host: myexternalhost
-    #   user: myuser
-    #   database: mydatabase
-    #   port: 3306
-    #   existingSecret: ""
----
+#     # Database
+#     mysql:
+#       enabled: false
+#     # TODO: Set up external database
+#     # externalDatabase:
+#     #   host: myexternalhost
+#     #   user: myuser
+#     #   database: mydatabase
+#     #   port: 3306
+#     #   existingSecret: "ghost-secrets"
+# ---
