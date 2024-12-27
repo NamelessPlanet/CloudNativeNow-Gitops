@@ -37,7 +37,7 @@ spec:
     # Ghost
     ghostUsername: admin
     ghostEmail: ghost@cloudnative.now
-    existingSecret: ghost
+    # existingSecret: ghost
     ghostBlogTitle: CloudNativeNow
     ghostHost: cloudnative.now
     ghostPath: /
