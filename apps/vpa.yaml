@@ -23,6 +23,9 @@ spec:
         name: vpa
         namespace: default
   values:
+    controller:
+      flags:
+        on-by-default: true
     updater:
       enabled: false
     admissionController:
