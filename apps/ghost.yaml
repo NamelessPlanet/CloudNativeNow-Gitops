@@ -53,7 +53,8 @@ spec:
     fullnameOverride: ghost
     commonLabels:
       app.kubernetes.io/name: ghost
-    updateStrategy: Recreate
+    updateStrategy:
+      type: Recreate
 
     # Ghost
     ghostUsername: admin
