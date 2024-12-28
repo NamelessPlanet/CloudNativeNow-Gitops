@@ -97,6 +97,7 @@ spec:
     smtpHost: "smtp.eu.mailgun.org"
     smtpPort: "465"
     smtpUser: "postmaster@mail.cloudnative.now"
+    smtpPassword: "not-actually-used"
     smtpService: "Mailgun"
     smtpProtocol: "ssl"
     smtpExistingSecret: "ghost-secrets"
