@@ -15,7 +15,7 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
 
   cluster_type       = "k3s"
   kubernetes_version = "1.30.5-k3s1"
-  cni                = "cilium"
+  cni                = "flannel"
 
   write_kubeconfig = true
 
