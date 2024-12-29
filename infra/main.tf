@@ -15,7 +15,7 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
 
   cluster_type       = "k3s"
   kubernetes_version = "1.30.5-k3s1"
-  cni                = "cilium"
+  cni                = "flannel"
 
   write_kubeconfig = true
 
@@ -29,11 +29,6 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
       pools["node_count"],
     ]
   }
-}
-
-resource "civo_object_store" "cloudnativenow" {
-  name        = "cloudnativenow"
-  max_size_gb = 500
 }
 
 resource "civo_database" "cloudnativenow" {
