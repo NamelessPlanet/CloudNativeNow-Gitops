@@ -1,3 +1,10 @@
+variable "civo_api_key" {
+  description = "Civo API key"
+  sensitive   = true
+  type        = string
+  default     = ""
+}
+
 variable "tfstate_access_key" {
   description = "TFState S3 access key"
   sensitive   = true

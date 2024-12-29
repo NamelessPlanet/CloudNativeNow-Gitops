@@ -46,3 +46,20 @@ resource "flux_bootstrap_git" "cloudnativenow" {
   embedded_manifests = true
   path               = "flux"
 }
+
+resource "kubernetes_secret" "cluster-autoscaler" {
+  metadata {
+    name = "cluster-autoscaler-civo"
+    namespace = "kube-system"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "api-key" = "${var.civo_api_key}"
+    "api-url" = "https://api.civo.com"
+    "cluster-id" = "${civo_kubernetes_cluster.cloudnativenow.id}"
+    "region" = "${var.region}"
+  }
+}
+

@@ -23,3 +23,16 @@ provider "flux" {
     }
   }
 }
+
+provider "kubernetes" {
+  host = civo_kubernetes_cluster.cloudnativenow.api_endpoint
+  client_certificate = base64decode(
+    yamldecode(civo_kubernetes_cluster.cloudnativenow.kubeconfig).users[0].user.client-certificate-data
+  )
+  client_key = base64decode(
+    yamldecode(civo_kubernetes_cluster.cloudnativenow.kubeconfig).users[0].user.client-key-data
+  )
+  cluster_ca_certificate = base64decode(
+    yamldecode(civo_kubernetes_cluster.cloudnativenow.kubeconfig).clusters[0].cluster.certificate-authority-data
+  )
+}

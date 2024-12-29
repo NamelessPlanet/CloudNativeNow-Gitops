@@ -8,6 +8,10 @@ terraform {
       source  = "fluxcd/flux"
       version = ">= 1.2"
     }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.35.1"
+    }
   }
 
   backend "s3" {
