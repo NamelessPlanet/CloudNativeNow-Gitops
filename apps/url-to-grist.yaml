@@ -59,7 +59,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: ghcr.io/namelessplanet/url-to-grist:v1.2.0
+        image: ghcr.io/namelessplanet/url-to-grist:v1.3.0
         imagePullPolicy: IfNotPresent
         env:
         - name: PORT
@@ -70,6 +70,24 @@ spec:
         ports:
         - containerPort: 8080
           name: web
+        livenessProbe:
+          httpGet:
+            port: web
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 3
+        readinessProbe:
+          httpGet:
+            port: web
+            path: /healthz
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 3
         resources:
           limits:
             memory: 20Mi
