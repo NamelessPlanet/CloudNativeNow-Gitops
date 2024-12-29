@@ -63,3 +63,16 @@ resource "kubernetes_secret" "cluster-autoscaler" {
   }
 }
 
+resource "kubernetes_secret" "ghost-database-password" {
+  metadata {
+    name = "ghost-database"
+    namespace = "ghost"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "mysql-password" = "${civo_database.cloudnativenow.password}"
+  }
+}
+
