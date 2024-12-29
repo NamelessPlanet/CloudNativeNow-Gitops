@@ -56,10 +56,10 @@ resource "kubernetes_secret" "cluster-autoscaler" {
   type = "Opaque"
 
   data = {
-    "api-key" = "${var.civo_api_key}"
-    "api-url" = "https://api.civo.com"
-    "cluster-id" = "${civo_kubernetes_cluster.cloudnativenow.id}"
-    "region" = "${var.region}"
+    CIVO_API_KEY = "${var.civo_api_key}"
+    CIVO_API_URL = "https://api.civo.com"
+    CIVO_CLUSTER_ID = "${civo_kubernetes_cluster.cloudnativenow.id}"
+    CIVO_REGION = "${var.region}"
   }
 }
 
