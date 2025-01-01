@@ -112,4 +112,15 @@ spec:
       database: ghost
       port: 3306
       existingSecret: "ghost-database"
+
+    initContainers:
+    - name: theme-install
+      image: ghcr.io/namelessplanet/cloudnativenow-theme:v0.0.1
+      imagePullPolicy: IfNotPresent
+      env:
+      - name: THEMES_DIR
+        value: /bitnami/ghost/content/themes/
+      volumeMounts:
+      - mountPath: /bitnami/ghost
+        name: ghost-data
 ---
