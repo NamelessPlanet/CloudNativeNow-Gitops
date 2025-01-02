@@ -34,3 +34,6 @@ spec:
           memory: 90Mi
         limits:
           memory: 90Mi
+      config:
+        hsts: true
+        hsts-include-subdomains: false
