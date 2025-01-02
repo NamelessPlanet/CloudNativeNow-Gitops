@@ -71,6 +71,8 @@ spec:
         value: "false"
       - name: "privacy__useGravatar"
         value: "false"
+      - name: GHOST_SMTP_FROM_ADDRESS
+        value: no-reply@mail.cloudnative.now
 
     service:
       type: ClusterIP
