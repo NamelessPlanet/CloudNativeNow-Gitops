@@ -8,33 +8,40 @@ resource "civo_firewall" "cloudnativenow" {
 
   create_default_rules = false
 
+  ingress_rule {
+    label      = "ping"
+    protocol   = "icmp"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+
   # Web access
   ingress_rule {
     label      = "http-tcp"
     protocol   = "tcp"
     port_range = "80"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
   ingress_rule {
     label      = "http-udp"
     protocol   = "udp"
     port_range = "80"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
   ingress_rule {
     label      = "https-tcp"
     protocol   = "tcp"
     port_range = "443"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
   ingress_rule {
     label      = "https-udp"
     protocol   = "udp"
     port_range = "443"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
 
@@ -43,14 +50,14 @@ resource "civo_firewall" "cloudnativenow" {
     label      = "kube-api-tcp"
     protocol   = "tcp"
     port_range = "6443"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
   ingress_rule {
     label      = "kube-api-udp"
     protocol   = "udp"
     port_range = "6443"
-    cidr       = ["0.0.0.0"]
+    cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
 
@@ -85,6 +92,21 @@ resource "civo_firewall" "cloudnativenow" {
     cidr       = ["0.0.0.0/0"]
     action     = "allow"
   }
+  egress_rule {
+    label      = "ping"
+    protocol   = "icmp"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # Needed because I initially started with default rules and then switched to custom
+      # Without this the firewall would need to be re-created which cannot be done while a cluster is using it
+      create_default_rules
+    ]
+  }
+
 }
 
 resource "civo_kubernetes_cluster" "cloudnativenow" {
