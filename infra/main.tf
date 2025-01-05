@@ -4,8 +4,87 @@ resource "civo_network" "cloudnativenow" {
 
 resource "civo_firewall" "cloudnativenow" {
   name                 = "cloudnativenow-firewall"
-  create_default_rules = true
   network_id           = civo_network.cloudnativenow.id
+
+  create_default_rules = false
+
+  # Web access
+  ingress_rule {
+    label      = "http-tcp"
+    protocol   = "tcp"
+    port_range = "80"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "http-udp"
+    protocol   = "udp"
+    port_range = "80"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "https-tcp"
+    protocol   = "tcp"
+    port_range = "443"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "https-udp"
+    protocol   = "udp"
+    port_range = "443"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+
+  # Kubernetes API Server
+  ingress_rule {
+    label      = "kube-api-tcp"
+    protocol   = "tcp"
+    port_range = "6443"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "kube-api-udp"
+    protocol   = "udp"
+    port_range = "6443"
+    cidr       = ["0.0.0.0"]
+    action     = "allow"
+  }
+
+  # Database access from own network
+  ingress_rule {
+    label      = "database-tcp"
+    protocol   = "tcp"
+    port_range = "3306"
+    cidr       = [civo_network.cloudnativenow.cidr_v4]
+    action     = "allow"
+  }
+  ingress_rule {
+    label      = "database-udp"
+    protocol   = "udp"
+    port_range = "3306"
+    cidr       = [civo_network.cloudnativenow.cidr_v4]
+    action     = "allow"
+  }
+
+  # Allow everything out
+  egress_rule {
+    label      = "all-tcp"
+    protocol   = "tcp"
+    port_range = "1-65535"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
+  egress_rule {
+    label      = "all-udp"
+    protocol   = "udp"
+    port_range = "1-65535"
+    cidr       = ["0.0.0.0/0"]
+    action     = "allow"
+  }
 }
 
 resource "civo_kubernetes_cluster" "cloudnativenow" {
