@@ -37,3 +37,41 @@ spec:
       config:
         hsts: true
         hsts-include-subdomains: false
+        custom-http-errors: "404,503"
+    defaultBackend:
+      enabled: true
+      image:
+        registry: registry.k8s.io
+        image: ingress-nginx/custom-error-pages
+        tag: v1.1.0
+      extraVolumes:
+      - name: custom-error-pages
+        configMap:
+          name: nginx-custom-error-pages
+          items:
+          - key: "404"
+            path: "404.html"
+          - key: "503"
+            path: "503.html"
+      extraVolumeMounts:
+      - name: custom-error-pages
+        mountPath: /www
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-custom-error-pages
+  namespace: kube-system
+data:
+  "404": |
+    <!DOCTYPE html>
+    <html>
+      <head><title>PAGE NOT FOUND</title></head>
+      <body>PAGE NOT FOUND</body>
+    </html>
+  "503": |
+    <!DOCTYPE html>
+    <html>
+      <head><title>SERVICE UNAVAILABLE</title></head>
+      <body>SERVICE UNAVAILABLE</body>
+    </html>
