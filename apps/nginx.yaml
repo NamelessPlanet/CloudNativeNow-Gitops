@@ -87,7 +87,7 @@ data:
             </header>
             <div class="site-content">
                 <div class="gh-canvas">
-                    <h1>❗ 404 - Page Not Found</h1>
+                    <h1>404 - Page Not Found</h1>
                     <div class="post-excerpt">
                         Well this is embarasing! We couldn't find what you were looking for.
                         <br/><br/>
@@ -135,9 +135,9 @@ data:
             </header>
             <div class="site-content">
                 <div class="gh-canvas">
-                    <h1>❗ 503 - Service Unavailable</h1>
+                    <h1>503 - Service Unavailable</h1>
                     <div class="post-excerpt">
-                      Oh no! 😱 It looks like something isn't running right now!
+                      Oh no! It looks like something isn't running right now!
                         <br/><br/>
                         Please check our <a href="https://k8s.social/@CloudNativeNow">Mastodon</a> or <a href="https://bsky.app/profile/cloudnative.now">Bluesky</a> accounts for service updates.
                     </div>
