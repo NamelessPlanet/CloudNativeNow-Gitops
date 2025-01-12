@@ -76,6 +76,14 @@ resource "civo_firewall" "cloudnativenow" {
     cidr       = [civo_network.cloudnativenow.cidr_v4]
     action     = "allow"
   }
+  # Temporary access while running mysqld exporter against DB
+  ingress_rule {
+    label      = "local"
+    protocol   = "tcp"
+    port_range = "3306"
+    cidr       = ["88.97.211.49/32"]
+    action     = "allow"
+  }
 
   # Allow everything out
   egress_rule {
