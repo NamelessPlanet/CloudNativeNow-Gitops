@@ -3,16 +3,16 @@ resource "civo_network" "cloudnativenow" {
 }
 
 resource "civo_firewall" "cloudnativenow" {
-  name                 = "cloudnativenow-firewall"
-  network_id           = civo_network.cloudnativenow.id
+  name       = "cloudnativenow-firewall"
+  network_id = civo_network.cloudnativenow.id
 
   create_default_rules = false
 
   ingress_rule {
-    label      = "ping"
-    protocol   = "icmp"
-    cidr       = ["0.0.0.0/0"]
-    action     = "allow"
+    label    = "ping"
+    protocol = "icmp"
+    cidr     = ["0.0.0.0/0"]
+    action   = "allow"
   }
 
   # Web access
@@ -101,10 +101,10 @@ resource "civo_firewall" "cloudnativenow" {
     action     = "allow"
   }
   egress_rule {
-    label      = "ping"
-    protocol   = "icmp"
-    cidr       = ["0.0.0.0/0"]
-    action     = "allow"
+    label    = "ping"
+    protocol = "icmp"
+    cidr     = ["0.0.0.0/0"]
+    action   = "allow"
   }
 
   lifecycle {
@@ -141,7 +141,7 @@ resource "civo_kubernetes_cluster" "cloudnativenow" {
 }
 
 resource "civo_database" "cloudnativenow" {
-  name    = "cloudnativenow"
+  name        = "cloudnativenow"
   firewall_id = civo_firewall.cloudnativenow.id
   network_id  = civo_network.cloudnativenow.id
 
@@ -152,7 +152,7 @@ resource "civo_database" "cloudnativenow" {
 }
 
 resource "civo_object_store" "cloudnativenow-backup" {
-  name = "cloudnativenow-backup"
+  name        = "cloudnativenow-backup"
   max_size_gb = 500
 }
 
@@ -163,23 +163,23 @@ resource "flux_bootstrap_git" "cloudnativenow" {
 
 resource "kubernetes_secret" "cluster-autoscaler" {
   metadata {
-    name = "cluster-autoscaler-civo"
+    name      = "cluster-autoscaler-civo"
     namespace = "kube-system"
   }
 
   type = "Opaque"
 
   data = {
-    CIVO_API_KEY = "${var.civo_api_key}"
-    CIVO_API_URL = "https://api.civo.com"
+    CIVO_API_KEY    = "${var.civo_api_key}"
+    CIVO_API_URL    = "https://api.civo.com"
     CIVO_CLUSTER_ID = "${civo_kubernetes_cluster.cloudnativenow.id}"
-    CIVO_REGION = "${var.region}"
+    CIVO_REGION     = "${var.region}"
   }
 }
 
 resource "kubernetes_secret" "ghost-database-password" {
   metadata {
-    name = "ghost-database"
+    name      = "ghost-database"
     namespace = "ghost"
   }
 
@@ -192,7 +192,7 @@ resource "kubernetes_secret" "ghost-database-password" {
 
 resource "kubernetes_secret" "ghost-backup-creds" {
   metadata {
-    name = "ghost-backup-creds"
+    name      = "ghost-backup-creds"
     namespace = "ghost"
   }
 

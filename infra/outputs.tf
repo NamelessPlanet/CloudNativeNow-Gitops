@@ -32,11 +32,11 @@ output "database_username" {
 output "database_password" {
   value       = civo_database.cloudnativenow.password
   description = "The password of the database"
-  sensitive = true
+  sensitive   = true
 }
 
 output "backup_objectstore_accesskeu" {
   value       = civo_object_store.cloudnativenow-backup.access_key_id
   description = "The access key for the backup object store"
-  sensitive = true
+  sensitive   = true
 }
