@@ -102,3 +102,125 @@ spec:
                 fi
               done;
               echo "Done!"
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ghost-backup-content
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+    app.kubernetes.io/component: content-backup
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ghost-backup-content
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+    app.kubernetes.io/component: content-backup
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ghost-backup-content
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+    app.kubernetes.io/component: content-backup
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ghost-backup-content
+subjects:
+- kind: ServiceAccount
+  name: ghost-backup-content
+  namespace: ghost
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ghost-backup-content
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+    app.kubernetes.io/component: content-backup
+spec:
+  schedule: "12 */1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: ghost-backup-content
+          restartPolicy: OnFailure
+          containers:
+          - name: backup-content
+            image: alpine:3
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: AWS_ACCESS_KEY_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: access-key-id
+              - name: AWS_SECRET_ACCESS_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: secret-access-key
+              - name: AWS_DEFAULT_REGION
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: region
+              - name: AWS_HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: host
+              - name: AWS_BUCKET_NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: name
+              - name: DAYS_TO_KEEP
+                value: "7"
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+
+              apk add kubectl s3cmd 1>/dev/null
+
+              mkdir -p /data
+              cd /data
+              POD_NAME=$(kubectl get pods -n ghost -l app.kubernetes.io/component=ghost -o jsonpath='{.items[0].metadata.name}')
+              echo "Copying content from Ghost pod ${POD_NAME}..."
+              kubectl exec -n ghost ${POD_NAME} -- \
+                tar cf - --exclude='logs' --exclude='themes' /bitnami/ghost/content | tar xf - -C ./
+
+              S3CMD="s3cmd \
+                --access_key=${AWS_ACCESS_KEY_ID} \
+                --secret_key=${AWS_SECRET_ACCESS_KEY} \
+                --host=https://${AWS_HOST} \
+                --host-bucket=s3://${AWS_BUCKET_NAME}"
+
+              echo "Content copied, uploading to object store..."
+              $S3CMD sync --delete-removed ./ s3://${AWS_BUCKET_NAME}/content/
+              echo "Done"
