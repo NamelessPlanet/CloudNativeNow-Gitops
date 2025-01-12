@@ -206,6 +206,8 @@ resource "kubernetes_secret" "ghost-backup-creds" {
   data = {
     "access-key-id"     = "${civo_object_store_credential.cloudnativenow-backup.access_key_id}"
     "secret-access-key" = "${civo_object_store_credential.cloudnativenow-backup.secret_access_key}"
+    "region"            = "${var.region}"
+    "host"              = "${civo_object_store.cloudnativenow-backup.bucket_url}"
   }
 }
 
