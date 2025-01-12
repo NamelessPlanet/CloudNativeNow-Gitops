@@ -23,8 +23,6 @@ terraform {
     skip_credentials_validation = true
     skip_metadata_api_check     = true
     force_path_style            = true
-    access_key                  = var.tfstate_access_key
-    secret_key                  = var.tfstate_secret_key
   }
 
 }

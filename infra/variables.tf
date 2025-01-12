@@ -5,20 +5,6 @@ variable "civo_api_key" {
   default     = ""
 }
 
-variable "tfstate_access_key" {
-  description = "TFState S3 access key"
-  sensitive   = true
-  type        = string
-  default     = ""
-}
-
-variable "tfstate_secret_key" {
-  description = "TFState S3 secret key"
-  sensitive   = true
-  type        = string
-  default     = ""
-}
-
 variable "region" {
   type    = string
   default = "LON1"

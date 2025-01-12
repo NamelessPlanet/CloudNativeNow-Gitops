@@ -23,8 +23,8 @@ permissions:
 
 env:
   TF_VAR_github_token: "${{ secrets.GITHUB_TOKEN }}"
-  TF_VAR_tfstate_access_key: "${{ secrets.TFSTATE_ACCESS_KEY }}"
-  TF_VAR_tfstate_secret_key: "${{ secrets.TFSTATE_SECRET_KEY }}"
+  AWS_ACCESS_KEY_ID: "${{ secrets.TFSTATE_ACCESS_KEY }}"
+  AWS_SECRET_ACCESS_KEY: "${{ secrets.TFSTATE_SECRET_KEY }}"
   TF_VAR_civo_api_key: "${{ secrets.CIVO_TOKEN }}"
   CIVO_TOKEN: "${{ secrets.CIVO_TOKEN }}"
 
