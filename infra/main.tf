@@ -151,9 +151,14 @@ resource "civo_database" "cloudnativenow" {
   version = "8.0"
 }
 
+resource "civo_object_store_credential" "cloudnativenow-backup" {
+  name = "cloudnativenow-backup"
+}
+
 resource "civo_object_store" "cloudnativenow-backup" {
-  name        = "cloudnativenow-backup"
-  max_size_gb = 500
+  name          = "cloudnativenow-backup"
+  max_size_gb   = 500
+  access_key_id = civo_object_store_credential.cloudnativenow-backup.access_key_id
 }
 
 resource "flux_bootstrap_git" "cloudnativenow" {
@@ -199,7 +204,8 @@ resource "kubernetes_secret" "ghost-backup-creds" {
   type = "Opaque"
 
   data = {
-    "access-key" = "${civo_object_store.cloudnativenow-backup.access_key_id}"
+    "access-key-id"     = "${civo_object_store_credential.cloudnativenow-backup.access_key_id}"
+    "secret-access-key" = "${civo_object_store_credential.cloudnativenow-backup.secret_access_key}"
   }
 }
 
