@@ -151,6 +151,11 @@ resource "civo_database" "cloudnativenow" {
   version = "8.0"
 }
 
+resource "civo_object_store" "cloudnativenow-backup" {
+  name = "cloudnativenow-backup"
+  max_size_gb = 500
+}
+
 resource "flux_bootstrap_git" "cloudnativenow" {
   embedded_manifests = true
   path               = "flux"
@@ -182,6 +187,19 @@ resource "kubernetes_secret" "ghost-database-password" {
 
   data = {
     "mysql-password" = "${civo_database.cloudnativenow.password}"
+  }
+}
+
+resource "kubernetes_secret" "ghost-backup-creds" {
+  metadata {
+    name = "ghost-backup-creds"
+    namespace = "ghost"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "access-key" = "${civo_object_store.cloudnativenow-backup.access_key_id}"
   }
 }
 

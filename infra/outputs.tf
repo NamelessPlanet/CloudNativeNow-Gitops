@@ -34,3 +34,9 @@ output "database_password" {
   description = "The password of the database"
   sensitive = true
 }
+
+output "backup_objectstore_accesskeu" {
+  value       = civo_object_store.cloudnativenow-backup.access_key_id
+  description = "The access key for the backup object store"
+  sensitive = true
+}
