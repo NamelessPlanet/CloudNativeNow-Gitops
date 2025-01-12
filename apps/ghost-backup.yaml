@@ -1,0 +1,104 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ghost-backup-database
+  namespace: ghost
+  labels:
+    app.kubernetes.io/name: ghost
+    app.kubernetes.io/component: database-backup
+spec:
+  schedule: "0 */12 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup-database
+            image: alpine:3
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-database
+                    key: mysql-password
+              - name: DB_USER
+                value: "root"
+              - name: DB_HOST
+                value: "74.220.21.158"
+              - name: DB_PORT
+                value: "3306"
+              - name: AWS_ACCESS_KEY_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: access-key-id
+              - name: AWS_SECRET_ACCESS_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: secret-access-key
+              - name: AWS_DEFAULT_REGION
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: region
+              - name: AWS_HOST
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: host
+              - name: AWS_BUCKET_NAME
+                valueFrom:
+                  secretKeyRef:
+                    name: ghost-backup-creds
+                    key: name
+              - name: DAYS_TO_KEEP
+                value: "7"
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+
+              apk add mysql-client s3cmd coreutils 1>/dev/null
+
+              FILENAME="$(date +"%Y%m%d%H%M")"
+              echo "Backing up database as ${FILENAME}.sql"
+              mysqldump \
+                --host=${DB_HOST} \
+                --port=${DB_PORT} \
+                --user=${DB_USER} \
+                --password=${DB_PASSWORD} \
+                --databases ghost \
+                --skip-ssl \
+                --lock-tables=false \
+                > ${FILENAME}.sql
+
+              S3CMD="s3cmd \
+                --access_key=${AWS_ACCESS_KEY_ID} \
+                --secret_key=${AWS_SECRET_ACCESS_KEY} \
+                --host=https://${AWS_HOST} \
+                --host-bucket=s3://${AWS_BUCKET_NAME}"
+
+              echo "SQL backup file created, uploading to object store..."
+              $S3CMD put ${FILENAME}.sql s3://${AWS_BUCKET_NAME}/database/
+
+              echo "Clearing old backups..."
+              $S3CMD ls s3://${AWS_BUCKET_NAME}/database/ | grep " DIR " -v | while read -r line;
+              do
+                createDate=`echo $line|awk {'print $1" "$2'}`
+                createDate=$(date -d "$createDate" "+%s")
+                olderThan=$(date -d "${DAYS_TO_KEEP} days ago" "+%s")
+                if [[ $createDate -le $olderThan ]];
+                  then
+                    fileName=`echo $line|awk {'print $4'}`
+                    if [ $fileName != "" ]
+                      then
+                        printf 'Deleting "%s"\n' $fileName
+                        $S3CMD  del "$fileName"
+                    fi
+                fi
+              done;
+              echo "Done!"
