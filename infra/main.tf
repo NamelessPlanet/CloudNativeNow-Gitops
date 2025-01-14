@@ -159,6 +159,10 @@ resource "civo_object_store" "cloudnativenow-backup" {
   name          = "cloudnativenow-backup"
   max_size_gb   = 500
   access_key_id = civo_object_store_credential.cloudnativenow-backup.access_key_id
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "flux_bootstrap_git" "cloudnativenow" {
