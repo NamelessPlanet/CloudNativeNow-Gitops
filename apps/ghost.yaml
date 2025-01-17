@@ -82,6 +82,7 @@ spec:
       hostname: cloudnative.now
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
+        ingress.kubernetes.io/ssl-redirect: "true"
       ingressClassName: nginx
       tls: true
       extraHosts:
