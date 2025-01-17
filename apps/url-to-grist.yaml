@@ -103,7 +103,6 @@ metadata:
     app.kubernetes.io/name: url-to-grist
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   tls:
   - hosts:
