@@ -2,7 +2,7 @@ terraform {
   required_providers {
     civo = {
       source  = "civo/civo"
-      version = "1.1.3"
+      version = "1.1.4"
     }
     flux = {
       source  = "fluxcd/flux"
