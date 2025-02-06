@@ -38,6 +38,7 @@ spec:
       max-node-provision-time: "10m"
       cordon-node-before-terminating: "true"
     envFromSecret: cluster-autoscaler-civo
+    secretKeyRefNameOverride: cluster-autoscaler-civo
     resources:
       limits:
         memory: 150Mi
