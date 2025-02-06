@@ -12,7 +12,9 @@
   },
   "flux": {
     "fileMatch": [
-      "(?:^|/)gotk-components\\.ya?ml$"
+      "(?:^|/)gotk-components\\.ya?ml$",
+      "flux/.+\\.ya?ml$",
+      "apps/.+\\.ya?ml$",
     ]
   },
   "packageRules": [
