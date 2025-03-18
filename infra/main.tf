@@ -81,7 +81,7 @@ resource "civo_firewall" "cloudnativenow" {
     label      = "local"
     protocol   = "tcp"
     port_range = "3306"
-    cidr       = ["88.97.211.49/32"]
+    cidr       = ["88.97.210.216/32"]
     action     = "allow"
   }
 
