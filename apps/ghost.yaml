@@ -48,6 +48,10 @@ spec:
     name: ghost
     namespace: default
   values:
+    global:
+      security:
+        allowInsecureImages: true
+
     # Common
     fullnameOverride: ghost
     commonLabels:
