@@ -126,7 +126,7 @@ spec:
 
     initContainers:
     - name: theme-install
-      image: ghcr.io/namelessplanet/cloudnativenow-theme:v0.0.10
+      image: ghcr.io/namelessplanet/cloudnativenow-theme:v0.0.11
       imagePullPolicy: IfNotPresent
       env:
       - name: THEMES_DIR
