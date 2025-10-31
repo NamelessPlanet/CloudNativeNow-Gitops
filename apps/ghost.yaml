@@ -63,6 +63,13 @@ spec:
       registry: ghcr.io
       repository: namelessplanet/ghost-container
       tag: 6.0.5-debian-12-r0
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: 375m
+        memory: 1024Mi
 
     # Ghost
     ghostUsername: admin
