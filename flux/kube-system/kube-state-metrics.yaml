@@ -343,7 +343,7 @@ spec:
         - --resources=volumeattachments
         - --port=8080
         - --telemetry-port=8081
-        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.17.0
+        image: registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.18.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 6
