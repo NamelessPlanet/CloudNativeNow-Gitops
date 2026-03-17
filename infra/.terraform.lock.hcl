@@ -35,31 +35,31 @@ provider "registry.opentofu.org/civo/civo" {
 }
 
 provider "registry.opentofu.org/fluxcd/flux" {
-  version     = "1.8.1"
+  version     = "1.8.3"
   constraints = ">= 1.2.0"
   hashes = [
-    "h1:6rR827YUiGJuesIMtmEzb/DsDtuE0PZshy9mQ7IqtZc=",
-    "h1:FjcbjjmIwKgzNt8SGwaBoDSp1P/Mk8JDot679In4vtE=",
-    "h1:N8SyrCIkBAouclMA/BBk12UZazU8UlfcC56YeBNHPK4=",
-    "h1:NB/m7JQy0CJEZiAtHz6kHLoAb7tzu8rMoH+QnrKkPUg=",
-    "h1:OcHmJG0b0/KH3dMYcvCv/FXnbbgbKjCRlNWIV1lzHnQ=",
-    "h1:Sdv6w8F/lcPKxm9WWfer2S08RTBofJezNUkuLdDelJM=",
-    "h1:c9Vx1+77MlnHKPVrw0kB7om8z9a+AlrrZZ9wEWKg+pM=",
-    "h1:g9qmFYjwAS8mmle5cXjDZM2m+p8RAQzY2060qbD2I54=",
-    "h1:ih7e5Taudee930Gp09AV8sVRkZoIVcBNJDRsF9vKC2Y=",
-    "h1:sRDoIrcRNDV2uBJFBOnyFm1hLCWg2kyBfHComuUvhzA=",
-    "h1:zkMWebnREZMFWzCrz/ixDg698nHuLzAa6569LWc91iw=",
-    "zh:0fc95f3702591918472ee845e99789f07e34a267ac2d8a370bf4ab9a9d10a314",
-    "zh:13de778e2f593208c4ac6e652d5c7992509741f5cfd29d1c843d36158ac31307",
-    "zh:181267285fa154f76e0da75656b562eaecae286ea36fbc7ae19ae958abf8ccd9",
-    "zh:1d387dc78d6811483b31a7059c443abcbaef62ae442733bd756f736c671ff8e0",
-    "zh:54befb37d19ffd266ed996033b9d2389c2a1314a4bcba6ae8ff3e4c718a418ed",
-    "zh:7ac82e61e2829e8d4b464557afe1fcbc78d5eb01ae5c7e3b34c61b805332096d",
-    "zh:9708d2a162d7809613d8db705cf6eedd6709af77f83f38b7106322886d5d133a",
-    "zh:b27f80ffa20d11cfa2c681428f71c77220d55ec2fb3a64a10739d99b7f1a4fba",
-    "zh:b435f93c81d319e77cf19b89c3c934a95e21611d5b74d9adaf0ea16c5e13872d",
-    "zh:b606e5bcca245afc488197f1b2b2c40c4ddf107a73a1501b1dbbed7779bfa6a5",
-    "zh:dd04e9f28c972690fc3157095a1d2c9e4d1650fd65eefad5c838bc4ffb6e7eec",
+    "h1:+/3vourN9SS/NovKQ/T2C2WTxJTex1iysJW7vtRMoL8=",
+    "h1:1durgGbtlOmpvxK6eXtysQBAePmuDAw8O2pKfZCeC7Y=",
+    "h1:ARIbsx0/hTzJNw3uAIagtBOar8gAxtCqZXZIaQ+eupw=",
+    "h1:CUwPLpHW4eXP4lfuD0uZoG0LG8ekfGcyFxkVEGflY3M=",
+    "h1:F+ExX2t25K7rWrwc2QBR6XFnmoZHbWo3YqbE3H+NBxA=",
+    "h1:Hsg1sVqEJHTE+8BBMU6L7imaJFUh+b/9DVFyOAQcdJs=",
+    "h1:N1oFyisEhX87iXb3EYLZLa3chnHz8wFFfJQvHay9qKM=",
+    "h1:n0K2YTNPaBeTJkUvetyLLQ0BVG7dw6aYw4cVN8ZG+mA=",
+    "h1:n54QJRBV2tdLNWQbBJqJ2PGQt6vB4P7GUTl8IdXODVc=",
+    "h1:qbsagSG+HnH9bFOKu6z3A2P4e6a/fKfT/mBsRMYfZOA=",
+    "h1:vujZvbHEM6EVU6RRnbF+kJE9TXLhNlIy27SPzAtA57M=",
+    "zh:26cbc78ad35f8f3b832c474976a5c5a7c7600705df3003e1d2bf28daf4adf559",
+    "zh:3be6a22cefd11104b806e3939538a7e2c9571f0c03fb30e4e2f6cd3c242ed38e",
+    "zh:43003cd20704e3f3f5b6f3d587a729249d4dd97db0234d48ea6443ec220216bb",
+    "zh:5364ee10bbf6d1b5eb53d70ecbb14c955ccde51498aa24bd72f20e5406acfdf0",
+    "zh:57d25cc988b3e21063115007319038dba4a962c79206c830016bf95db68ea375",
+    "zh:6ad5cba745d176b1c1289afb2429ba9ce599848119c7e040fc66e4f2b18029a1",
+    "zh:78b1aacfdb679eef8b6f62924914857dd998204b37afe97c28150df874e0e77b",
+    "zh:ac8fbe6cc6a61de31d0d3102bba503bf7731c64010ab1043bceff4cb37812c65",
+    "zh:c652d2e9ddc708ac076f16dd0087c1fa8167895ad61ffe16dca2e1de23bc0063",
+    "zh:eae4b3bb59bed9ae6112d9c3467e2b2b1a95c4cfb4ec69a9432aa065b30a1cb4",
+    "zh:f6b25f8175fc71cad70acb9bfb26c82949bc8c7a4a9af49ef0210405ad7a5e96",
   ]
 }
 
